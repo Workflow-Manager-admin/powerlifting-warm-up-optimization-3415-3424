@@ -1,3 +1,10 @@
+# Cleaned requirements.txt for powerlifting_backend.
+# Only strictly necessary dependencies with supported version ranges.
+# Specify minimum Python version for FastAPI 0.95+ (Python 3.7+).
+# See: https://fastapi.tiangolo.com/deployment/versions/
+# Note: No blank lines or invisible unicode/whitespace.
+
 fastapi>=0.95.0,<1.0.0
 uvicorn[standard]>=0.20.0,<1.0.0
 pydantic>=1.10.0,<2.0.0
+python_version >= "3.7"
