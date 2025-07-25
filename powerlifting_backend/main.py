@@ -5,6 +5,7 @@ from powerlifting_backend.utils import (
     calculate_warmup_sets,
     predict_max_reps
 )
+import os
 
 app = FastAPI(
     title="Powerlifting Warm-Up and Max Rep Calculator",
@@ -138,4 +139,13 @@ async def max_reps(req: MaxRepsRequest):
         reps = predict_max_reps(req.weight, req.rpe)
         return {"predicted_max_reps": reps}
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)}
+
+
+# --- Entrypoint for uvicorn ---
+# Allow running with: python -m powerlifting_backend.main or `uvicorn powerlifting_backend.main:app`
+if __name__ == "__main__":
+    import uvicorn
+    # Use port 8000 by default or read PORT env
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("powerlifting_backend.main:app", host="0.0.0.0", port=port, reload=True)
